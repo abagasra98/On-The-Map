@@ -83,14 +83,22 @@ class LocationsTableView: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showWebPage" {
+            if let navController = segue.destinationViewController as? UINavigationController {
+                if let webVC = navController.topViewController as? WebViewController {
+                    let sectionIndex = tableView.indexPathForSelectedRow?.section
+                    let sectionRow = tableView.indexPathForSelectedRow?.row
+                    let artwork = locationsArray![sectionIndex!][sectionRow!]
+                    webVC.websiteURL = NSURL(string: artwork.mediaURL)
+                }
+            }
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }

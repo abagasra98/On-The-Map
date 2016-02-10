@@ -16,6 +16,8 @@
 		969E5F5C1C1B189900B10B85 /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969E5F5B1C1B189900B10B85 /* MapViewExtension.swift */; };
 		96AF9E5C1BFE1A64000BC04C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF9E5B1BFE1A64000BC04C /* MapViewController.swift */; };
 		96B999551BF4DAAF0099BF7F /* UdacityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B999541BF4DAAF0099BF7F /* UdacityService.swift */; };
+		96BECC381C60F90C00FF7EFA /* LocationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BECC371C60F90C00FF7EFA /* LocationPostingViewController.swift */; };
+		96BECC3A1C60FAFF00FF7EFA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BECC391C60FAFF00FF7EFA /* WebViewController.swift */; };
 		96E09DB11C5911670088DEDE /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09DB01C5911670088DEDE /* TextField.swift */; };
 		96E741A21C04AD6D00F4D270 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E741A11C04AD6D00F4D270 /* Location.swift */; };
 		96EFE7C41BEF3B740000FE58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EFE7C31BEF3B740000FE58 /* AppDelegate.swift */; };
@@ -55,6 +57,8 @@
 		969E5F5B1C1B189900B10B85 /* MapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewExtension.swift; path = ../MapViewExtension.swift; sourceTree = "<group>"; };
 		96AF9E5B1BFE1A64000BC04C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		96B999541BF4DAAF0099BF7F /* UdacityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityService.swift; sourceTree = "<group>"; };
+		96BECC371C60F90C00FF7EFA /* LocationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPostingViewController.swift; sourceTree = "<group>"; };
+		96BECC391C60FAFF00FF7EFA /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		96E09DB01C5911670088DEDE /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		96E741A11C04AD6D00F4D270 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		96EFE7C01BEF3B740000FE58 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +102,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96BECC351C60F8C200FF7EFA /* Custom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				96459C1B1C57B90A00EBF84D /* HashTable.swift */,
+				96E09DB01C5911670088DEDE /* TextField.swift */,
+				969E5F571C1B138200B10B85 /* Artwork.swift */,
+				96E741A11C04AD6D00F4D270 /* Location.swift */,
+			);
+			name = "Custom Classes";
+			sourceTree = "<group>";
+		};
+		96BECC361C60F8CE00FF7EFA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9607F84A1C5125FD002AC995 /* ArrayExtension.swift */,
+				969E5F5B1C1B189900B10B85 /* MapViewExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		96EFE7B71BEF3B740000FE58 = {
 			isa = PBXGroup;
 			children = (
@@ -123,19 +147,17 @@
 			children = (
 				96EFE7C31BEF3B740000FE58 /* AppDelegate.swift */,
 				96EFE7C51BEF3B740000FE58 /* ViewController.swift */,
-				96459C1B1C57B90A00EBF84D /* HashTable.swift */,
+				96BECC391C60FAFF00FF7EFA /* WebViewController.swift */,
+				96BECC371C60F90C00FF7EFA /* LocationPostingViewController.swift */,
 				963318F31C469B9800484090 /* TabBarController.swift */,
 				96AF9E5B1BFE1A64000BC04C /* MapViewController.swift */,
-				969E5F5B1C1B189900B10B85 /* MapViewExtension.swift */,
 				963318EF1C469A2000484090 /* LocationsTableView.swift */,
 				96088E431C47EAC100332EFD /* LocationCell.swift */,
 				96EFE7C71BEF3B740000FE58 /* Main.storyboard */,
-				96E09DB01C5911670088DEDE /* TextField.swift */,
 				96EFE7F11BEF3ED00000FE58 /* NetworkOperation.swift */,
 				96B999541BF4DAAF0099BF7F /* UdacityService.swift */,
-				969E5F571C1B138200B10B85 /* Artwork.swift */,
-				96E741A11C04AD6D00F4D270 /* Location.swift */,
-				9607F84A1C5125FD002AC995 /* ArrayExtension.swift */,
+				96BECC361C60F8CE00FF7EFA /* Extensions */,
+				96BECC351C60F8C200FF7EFA /* Custom Classes */,
 				96EFE7CA1BEF3B740000FE58 /* Assets.xcassets */,
 				96EFE7CC1BEF3B740000FE58 /* LaunchScreen.storyboard */,
 				96EFE7CF1BEF3B740000FE58 /* Info.plist */,
@@ -298,6 +320,7 @@
 				96EFE7C61BEF3B740000FE58 /* ViewController.swift in Sources */,
 				96459C1C1C57B90A00EBF84D /* HashTable.swift in Sources */,
 				963318F41C469B9800484090 /* TabBarController.swift in Sources */,
+				96BECC381C60F90C00FF7EFA /* LocationPostingViewController.swift in Sources */,
 				96E09DB11C5911670088DEDE /* TextField.swift in Sources */,
 				96EFE7F21BEF3ED00000FE58 /* NetworkOperation.swift in Sources */,
 				9607F84B1C5125FD002AC995 /* ArrayExtension.swift in Sources */,
@@ -309,6 +332,7 @@
 				96E741A21C04AD6D00F4D270 /* Location.swift in Sources */,
 				96B999551BF4DAAF0099BF7F /* UdacityService.swift in Sources */,
 				969E5F5C1C1B189900B10B85 /* MapViewExtension.swift in Sources */,
+				96BECC3A1C60FAFF00FF7EFA /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
