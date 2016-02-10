@@ -43,6 +43,11 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         webView.goForward()
     }
     
+    @IBAction func cancelWebView(sender: AnyObject) {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        //self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func pageSwiped(sender: UISwipeGestureRecognizer) {
         if (sender.direction == UISwipeGestureRecognizerDirection.Left) {
             webView.goBack()

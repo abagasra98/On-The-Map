@@ -8,8 +8,18 @@
 
 import UIKit
 
-class LocationPostingViewController: UIViewController {
-
+class LocationPostingViewController: UIViewController, UITextFieldDelegate {
+    // MARK: Properties
+    var plainLocation: String?
+    
+    // MARK: Outlets
+    @IBOutlet weak var locationTextField: UITextField! {
+        didSet {
+            locationTextField.delegate = self
+        }
+    }
+    
+    // MARK: View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +31,31 @@ class LocationPostingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Functions
+    @IBAction func cancelPosting(sender: AnyObject) {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
 
+    @IBAction func encodeLocation(sender: AnyObject) {
+        if (locationTextField.text != nil && locationTextField.text != "") {
+            plainLocation = locationTextField.text
+        } else {
+            let alert = UIAlertController(title: "You forgot to enter a location!", message: nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: UITextField Delegate Methods
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField == locationTextField) {
+            plainLocation = textField.text
+        }
+        textField.resignFirstResponder()
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 

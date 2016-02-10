@@ -261,6 +261,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vac-tQ-yFI">
                                         <rect key="frame" x="545" y="8" width="48" height="30"/>
                                         <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelPosting:" destination="rnR-P3-W1w" eventType="touchUpInside" id="iwZ-AV-aoZ"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXp-EF-txy">
                                         <rect key="frame" x="210" y="38" width="180" height="100"/>
@@ -294,6 +297,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="encodeLocation:" destination="rnR-P3-W1w" eventType="touchUpInside" id="eHu-1u-ygg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
@@ -338,6 +344,9 @@
                             <constraint firstItem="bu0-UE-16x" firstAttribute="leading" secondItem="ec0-Iq-qiC" secondAttribute="leading" id="ygF-I7-5UY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="locationTextField" destination="296-wQ-VCe" id="hOV-BX-Bh5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlE-em-gIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -391,7 +400,11 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Web Page" id="xAu-ij-Aj5">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="TvA-ms-WzW"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="TvA-ms-WzW">
+                            <connections>
+                                <action selector="cancelWebView:" destination="Ara-g6-ToW" id="Jb8-t3-Wgv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
