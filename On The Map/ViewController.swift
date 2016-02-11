@@ -37,6 +37,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Functions
     @IBAction func loginToUdacity(sender: UIButton) {
+        verifyTextField()
         if (email != nil && password != nil) {
             let udacityService = UdacityService()
             udacityService.getLocations(email!, password: password!, completion: { (let locationData) -> Void in
@@ -65,6 +66,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return hashTable.convertToArray()
     }
     
+    func verifyTextField() {
+        if let emailText = emailTextField.text, passText = passwordTextField.text { //Find a way to resign 1st responder status
+            email = emailText
+            password = passText
+        } else {
+            let alert = UIAlertController(title: "You forgot to enter the login information!", message: nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showMap" {
             if let tabBarController = segue.destinationViewController as? TabBarController {
@@ -75,7 +88,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
-            
         }
     }
     

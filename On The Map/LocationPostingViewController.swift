@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import MapKit
 
-class LocationPostingViewController: UIViewController, UITextFieldDelegate {
+class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     // MARK: Properties
     var plainLocation: String?
     
     // MARK: Outlets
+    @IBOutlet weak var displayLabel: UILabel!
+    @IBOutlet weak var locationView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            mapView.delegate = self
+        }
+    }
     @IBOutlet weak var locationTextField: UITextField! {
         didSet {
             locationTextField.delegate = self
         }
     }
+
     
     // MARK: View Controller Lifecycle
     override func viewDidLoad() {
@@ -37,6 +47,30 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func encodeLocation(sender: AnyObject) {
+        verifyTextField()
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(plainLocation!) { (let placemarks, let error) -> Void in
+            if (error != nil) {
+                print("Geocode failed with error: \(error!.localizedDescription)")
+            } else if (placemarks!.count > 0) {
+                self.prepareForMapDisplay()
+                let placemark = placemarks![0]
+                let coordinates = placemark.location?.coordinate
+                let artwork = Artwork(coordinate: coordinates!)
+                self.mapView.addAnnotation(artwork)
+            }
+        }
+        
+    }
+    
+    func prepareForMapDisplay() {
+        displayLabel.text = plainLocation
+        locationView.hidden = true
+        bottomView.hidden = true
+        mapView.hidden = false
+    }
+    
+    func verifyTextField() {
         if (locationTextField.text != nil && locationTextField.text != "") {
             plainLocation = locationTextField.text
         } else {
@@ -54,6 +88,25 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate {
         }
         textField.resignFirstResponder()
         return true
+    }
+    
+    // MARK: MKMapView Delegate Methods
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? Artwork {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+                dequedView.annotation = annotation
+                view = dequedView
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x: -5, y: 5)
+                view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+            }
+            return view
+        }
+        return nil
     }
     
     /*

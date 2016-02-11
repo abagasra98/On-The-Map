@@ -29,5 +29,14 @@ class Artwork: NSObject, MKAnnotation {
         super.init()
     }
     
+    init(coordinate: CLLocationCoordinate2D) {
+        title = "Test"
+        mediaURL = "Test"
+        discipline = "Test"
+        self.coordinate = coordinate
+        
+        super.init()
+    }
+    
     
 }
