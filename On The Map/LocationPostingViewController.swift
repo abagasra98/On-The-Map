@@ -9,9 +9,10 @@
 import UIKit
 import MapKit
 
-class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
+class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     // MARK: Properties
     var plainLocation: String?
+    let locationManager = CLLocationManager()
     
     // MARK: Outlets
     @IBOutlet weak var displayLabel: UILabel!
@@ -32,7 +33,8 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
     // MARK: View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
         // Do any additional setup after loading the view.
     }
 
@@ -48,19 +50,45 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
 
     @IBAction func encodeLocation(sender: AnyObject) {
         verifyTextField()
+        if (plainLocation! == "Current Location") {
+            getCurrentLocation()
+        } else {
+            let coordinate = reverseGeoCoding()
+            let artwork = Artwork(coordinate: coordinate!)
+            self.prepareForMapDisplay()
+            self.mapView.addAnnotation(artwork)
+        }
+//        let geoCoder = CLGeocoder()
+//        geoCoder.geocodeAddressString(plainLocation!) { (let placemarks, let error) -> Void in
+//            if (error != nil) {
+//                print("Geocode failed with error: \(error!.localizedDescription)")
+//            } else if (placemarks!.count > 0) {
+//                self.prepareForMapDisplay()
+//                let placemark = placemarks![0]
+//                let coordinates = placemark.location?.coordinate
+//                let artwork = Artwork(coordinate: coordinates!)
+//                self.mapView.addAnnotation(artwork)
+//            }
+//        }
+        
+    }
+    
+    func reverseGeoCoding() -> CLLocationCoordinate2D? {
+        var coordinate: CLLocationCoordinate2D?
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(plainLocation!) { (let placemarks, let error) -> Void in
             if (error != nil) {
                 print("Geocode failed with error: \(error!.localizedDescription)")
             } else if (placemarks!.count > 0) {
-                self.prepareForMapDisplay()
                 let placemark = placemarks![0]
-                let coordinates = placemark.location?.coordinate
-                let artwork = Artwork(coordinate: coordinates!)
-                self.mapView.addAnnotation(artwork)
+                coordinate = (placemark.location?.coordinate)!
             }
         }
-        
+        return coordinate
+    }
+    
+    func getCurrentLocation() {//-> CLLocationCoordinate2D {
+        locationManager.startUpdatingLocation()
     }
     
     func prepareForMapDisplay() {
@@ -107,6 +135,16 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
             return view
         }
         return nil
+    }
+    
+    // MARK: CLLocationManager Delegate Methods
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for location in locations {
+            if (location.verticalAccuracy < 1000 && location.horizontalAccuracy < 1000) {
+                print(location)
+                locationManager.stopUpdatingLocation()
+            }
+        }
     }
     
     /*
