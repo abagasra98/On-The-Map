@@ -118,6 +118,7 @@
 		96BECC361C60F8CE00FF7EFA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				96CAEF951C809A7300797D70 /* LocationExtension.swift */,
 				9607F84A1C5125FD002AC995 /* ArrayExtension.swift */,
 				969E5F5B1C1B189900B10B85 /* MapViewExtension.swift */,
 			);
@@ -151,7 +152,6 @@
 				96EFE7C51BEF3B740000FE58 /* ViewController.swift */,
 				96BECC391C60FAFF00FF7EFA /* WebViewController.swift */,
 				96BECC371C60F90C00FF7EFA /* LocationPostingViewController.swift */,
-				96CAEF951C809A7300797D70 /* LocationExtension.swift */,
 				963318F31C469B9800484090 /* TabBarController.swift */,
 				96AF9E5B1BFE1A64000BC04C /* MapViewController.swift */,
 				963318EF1C469A2000484090 /* LocationsTableView.swift */,

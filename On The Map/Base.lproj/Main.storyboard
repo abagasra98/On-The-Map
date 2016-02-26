@@ -349,16 +349,16 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="aView" destination="wEa-N7-kzw" id="F0j-ZQ-uth"/>
                         <outlet property="bottomView" destination="bu0-UE-16x" id="9c2-3K-wpB"/>
                         <outlet property="displayLabel" destination="xXp-EF-txy" id="cEc-PP-U4B"/>
                         <outlet property="locationTextField" destination="296-wQ-VCe" id="hOV-BX-Bh5"/>
+                        <outlet property="locationView" destination="E5b-bL-lC6" id="6ZQ-8A-4rC"/>
                         <outlet property="mapView" destination="U9k-VO-Ncc" id="s6f-FU-u7y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlE-em-gIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4355" y="139"/>
+            <point key="canvasLocation" x="4355" y="135"/>
         </scene>
         <!--Web Page-->
         <scene sceneID="jhj-ug-YQf">
