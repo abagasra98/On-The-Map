@@ -12,6 +12,7 @@ import MapKit
 class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     // MARK: Properties
     var plainLocation: String?
+    var currentLocation: CLLocation?
     let locationManager = CLLocationManager()
     
     // MARK: Outlets
@@ -28,14 +29,16 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
             locationTextField.delegate = self
         }
     }
-
     
     // MARK: View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        // Do any additional setup after loading the view.
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +54,14 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
     @IBAction func encodeLocation(sender: AnyObject) {
         verifyTextField()
         if (plainLocation! == "Current Location") {
-            getCurrentLocation()
+            if (currentLocation != nil) {
+                print(currentLocation)
+            } else {
+                let alert = UIAlertController(title: "Your Current Location Could Not Be Determined", message: nil, preferredStyle: .Alert)
+                let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                alert.addAction(cancelAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         } else {
             let coordinate = reverseGeoCoding()
             let artwork = Artwork(coordinate: coordinate!)
@@ -87,14 +97,11 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
         return coordinate
     }
     
-    func getCurrentLocation() {//-> CLLocationCoordinate2D {
-        locationManager.startUpdatingLocation()
-    }
-    
     func prepareForMapDisplay() {
         displayLabel.text = plainLocation
         locationView.hidden = true
         bottomView.hidden = true
+        locationTextField.hidden = true
         mapView.hidden = false
     }
     
@@ -106,44 +113,6 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
             let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
             alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    
-    // MARK: UITextField Delegate Methods
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (textField == locationTextField) {
-            plainLocation = textField.text
-        }
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    // MARK: MKMapView Delegate Methods
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? Artwork {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            if let dequedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
-                dequedView.annotation = annotation
-                view = dequedView
-            } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
-                view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
-            }
-            return view
-        }
-        return nil
-    }
-    
-    // MARK: CLLocationManager Delegate Methods
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for location in locations {
-            if (location.verticalAccuracy < 1000 && location.horizontalAccuracy < 1000) {
-                print(location)
-                locationManager.stopUpdatingLocation()
-            }
         }
     }
     

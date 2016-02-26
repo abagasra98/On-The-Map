@@ -18,6 +18,7 @@
 		96B999551BF4DAAF0099BF7F /* UdacityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B999541BF4DAAF0099BF7F /* UdacityService.swift */; };
 		96BECC381C60F90C00FF7EFA /* LocationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BECC371C60F90C00FF7EFA /* LocationPostingViewController.swift */; };
 		96BECC3A1C60FAFF00FF7EFA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BECC391C60FAFF00FF7EFA /* WebViewController.swift */; };
+		96CAEF961C809A7300797D70 /* LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CAEF951C809A7300797D70 /* LocationExtension.swift */; };
 		96E09DB11C5911670088DEDE /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09DB01C5911670088DEDE /* TextField.swift */; };
 		96E741A21C04AD6D00F4D270 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E741A11C04AD6D00F4D270 /* Location.swift */; };
 		96EFE7C41BEF3B740000FE58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EFE7C31BEF3B740000FE58 /* AppDelegate.swift */; };
@@ -59,6 +60,7 @@
 		96B999541BF4DAAF0099BF7F /* UdacityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityService.swift; sourceTree = "<group>"; };
 		96BECC371C60F90C00FF7EFA /* LocationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPostingViewController.swift; sourceTree = "<group>"; };
 		96BECC391C60FAFF00FF7EFA /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		96CAEF951C809A7300797D70 /* LocationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationExtension.swift; sourceTree = "<group>"; };
 		96E09DB01C5911670088DEDE /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		96E741A11C04AD6D00F4D270 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		96EFE7C01BEF3B740000FE58 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +151,7 @@
 				96EFE7C51BEF3B740000FE58 /* ViewController.swift */,
 				96BECC391C60FAFF00FF7EFA /* WebViewController.swift */,
 				96BECC371C60F90C00FF7EFA /* LocationPostingViewController.swift */,
+				96CAEF951C809A7300797D70 /* LocationExtension.swift */,
 				963318F31C469B9800484090 /* TabBarController.swift */,
 				96AF9E5B1BFE1A64000BC04C /* MapViewController.swift */,
 				963318EF1C469A2000484090 /* LocationsTableView.swift */,
@@ -331,6 +334,7 @@
 				96AF9E5C1BFE1A64000BC04C /* MapViewController.swift in Sources */,
 				96E741A21C04AD6D00F4D270 /* Location.swift in Sources */,
 				96B999551BF4DAAF0099BF7F /* UdacityService.swift in Sources */,
+				96CAEF961C809A7300797D70 /* LocationExtension.swift in Sources */,
 				969E5F5C1C1B189900B10B85 /* MapViewExtension.swift in Sources */,
 				96BECC3A1C60FAFF00FF7EFA /* WebViewController.swift in Sources */,
 			);

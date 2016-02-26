@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return hashTable.convertToArray()
     }
     
-    func verifyTextField() {
+    func verifyTextField() { //need to resignfirstresponder
         if let emailText = emailTextField.text, passText = passwordTextField.text { //Find a way to resign 1st responder status
             email = emailText
             password = passText
