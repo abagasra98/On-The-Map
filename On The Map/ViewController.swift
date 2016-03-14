@@ -38,14 +38,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: Functions
     @IBAction func loginToUdacity(sender: UIButton) {
         verifyTextField()
-        if (email != nil && password != nil) {
-            let udacityService = UdacityService()
-            udacityService.getLocations(email!, password: password!, completion: { (let locationData) -> Void in
-                self.locationsArray = self.removeDuplicates(locationData!)
-                //self.removeDuplicates(self.locationsArray!)
-                self.performSegueWithIdentifier("showMap", sender: self)
-            })
-        }
+        let udacityService = UdacityService()
+        udacityService.getLocations(email!, password: password!, completion: { (let locationData) -> Void in
+            self.locationsArray = self.removeDuplicates(locationData!)
+            //self.removeDuplicates(self.locationsArray!)
+            self.performSegueWithIdentifier("showMap", sender: self)
+        })
     }
 
     @IBAction func signupForUdacity(sender: UIButton) {
@@ -67,7 +65,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func verifyTextField() { //need to resignfirstresponder
-        if let emailText = emailTextField.text, passText = passwordTextField.text { //Find a way to resign 1st responder status
+        if let emailText = emailTextField.text, passText = passwordTextField.text {
             email = emailText
             password = passText
         } else {
@@ -76,6 +74,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
         }
+//        
+//        if (emailTextField.isFirstResponder() && passwordTextField.isFirstResponder()) {
+//            emailTextField.resignFirstResponder()
+//            passwordTextField.resignFirstResponder()
+//        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

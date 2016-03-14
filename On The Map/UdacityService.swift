@@ -20,6 +20,11 @@ class UdacityService {
                 self.getlocations({ (let locationsArray) -> Void in
                     completion(locationsArray)
                 })
+            } else {
+                let alert = UIAlertController(title: "The email or password you entered is invalid", message: nil, preferredStyle: .Alert)
+                let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                alert.addAction(action)
+                
             }
         }
     }

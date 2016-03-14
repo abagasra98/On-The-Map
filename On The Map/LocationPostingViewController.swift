@@ -17,6 +17,7 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
     
     // MARK: Outlets
     @IBOutlet weak var displayLabel: UILabel!
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var mapView: MKMapView! {
@@ -54,23 +55,24 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
 
     @IBAction func encodeLocation(sender: AnyObject) {
         verifyTextField()
-        if (plainLocation! == "Current Location") {
-            if (currentLocation != nil) {
-                print(currentLocation)
-            } else {
-                let alert = UIAlertController(title: "Your Current Location Could Not Be Determined", message: nil, preferredStyle: .Alert)
-                let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-                alert.addAction(cancelAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
+        reverseGeoCoding({ (let coordinate) -> Void in // Implement alert that shows if error
+            self.prepareForMapDisplay()
+            self.displayMap(coordinate!)
+        })
+    }
+    
+    @IBAction func getCurrentLocation(sender: UIButton) {
+        if (currentLocation != nil) {
+            print(currentLocation)
+            self.prepareForMapDisplay()
+            self.displayMap((currentLocation?.coordinate)!)
         } else {
-            reverseGeoCoding({ (let coordinate) -> Void in
-                let artwork = Artwork(coordinate: coordinate!)
-                self.prepareForMapDisplay()
-                self.mapView.setCenterCoordinate(coordinate!, animated: true)
-                self.mapView.addAnnotation(artwork)
-            })
+            let alert = UIAlertController(title: "Your Current Location Could Not Be Determined", message: nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
         }
+
     }
     
     func reverseGeoCoding(completionHandler: (CLLocationCoordinate2D? -> Void)) {
@@ -87,10 +89,19 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
     
     func prepareForMapDisplay() {
         displayLabel.text = plainLocation
-        //locationView.hidden = true
+        displayLabel.textColor = UIColor.whiteColor()
+        topView.backgroundColor = UIColor(red: 81.0/255.0, green: 137.0/255.0, blue: 180.0/255.0, alpha: 1.0)
         bottomView.hidden = true
         locationTextField.hidden = true
         mapView.hidden = false
+    }
+    
+    func displayMap(coordinate: CLLocationCoordinate2D) {
+        let artwork = Artwork(coordinate: coordinate)
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100)
+        //self.mapView.setCenterCoordinate(coordinate, animated: true)
+        self.mapView.setRegion(region, animated: true)
+        self.mapView.addAnnotation(artwork)
     }
     
     func verifyTextField() {
@@ -101,6 +112,9 @@ class LocationPostingViewController: UIViewController, UITextFieldDelegate, MKMa
             let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
             alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
+        }
+        if (locationTextField.isFirstResponder()) {
+            locationTextField.resignFirstResponder()
         }
     }
     
